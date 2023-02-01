@@ -2,6 +2,8 @@ EXPECTED_OUTPUT = """
 avalanche
 ├── mainnet
 │   └── geth  (default)
+├── fuji
+│   └── geth  (default)
 └── local  (default)
     └── test  (default)
 """.strip()
