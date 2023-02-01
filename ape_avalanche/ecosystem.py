@@ -7,6 +7,7 @@ from ape_ethereum.ecosystem import Ethereum, NetworkConfig
 NETWORKS = {
     # chain_id, network_id
     "mainnet": (43114, 43114),
+    "fuji": (43113, 43113),
 }
 
 
@@ -26,8 +27,10 @@ def _create_local_config(default_provider: Optional[str] = None) -> NetworkConfi
 
 
 class AvalancheConfig(PluginConfig):
-    mainnet: NetworkConfig = _create_network_config()
+    mainnet: NetworkConfig = _create_network_config(required_confirmations=1, block_time=2)
     mainnet_fork: NetworkConfig = _create_local_config()
+    fuji: NetworkConfig = _create_network_config(required_confirmations=1, block_time=2)
+    fuji_fork: NetworkConfig = _create_local_config()
     local: NetworkConfig = _create_local_config(default_provider="test")
     default_network: str = LOCAL_NETWORK_NAME
 
