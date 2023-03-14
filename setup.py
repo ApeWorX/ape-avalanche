@@ -56,7 +56,9 @@ setup(
     author_email="admin@apeworx.io",
     url="https://github.com/ApeWorX/ape-avalanche",
     include_package_data=True,
-    install_requires=[],
+    install_requires=[
+        "eth-ape>=0.6.5,<0.7.0",
+    ],
     python_requires=">=3.8,<4",
     extras_require=extras_require,
     py_modules=["ape-avalanche"],
