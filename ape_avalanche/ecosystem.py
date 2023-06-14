@@ -1,4 +1,4 @@
-from typing import Dict, Optional, Type, Union, cast
+from typing import Dict, Optional, Type, Union
 
 from ape.api import TransactionAPI
 from ape.api.config import PluginConfig
@@ -14,7 +14,6 @@ from ape_ethereum.transactions import (
     TransactionType,
 )
 
-
 NETWORKS = {
     # chain_id, network_id
     "mainnet": (43114, 43114),
@@ -26,6 +25,7 @@ class ApeAvalancheError(ApeException):
     """
     Raised in the ape-avalanche plugin.
     """
+
 
 def _create_network_config(
     required_confirmations: int = 1, block_time: int = 3, **kwargs
