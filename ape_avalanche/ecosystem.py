@@ -2,6 +2,7 @@ from typing import Optional
 
 from ape.api.config import PluginConfig
 from ape.api.networks import LOCAL_NETWORK_NAME
+from ape.utils import DEFAULT_LOCAL_TRANSACTION_ACCEPTANCE_TIMEOUT
 from ape_ethereum.ecosystem import Ethereum, NetworkConfig
 
 NETWORKS = {
@@ -12,16 +13,20 @@ NETWORKS = {
 
 
 def _create_network_config(
-    required_confirmations: int = 1, block_time: int = 2, **kwargs
+    required_confirmations: int = 1, block_time: int = 3, **kwargs
 ) -> NetworkConfig:
     return NetworkConfig(
         required_confirmations=required_confirmations, block_time=block_time, **kwargs
     )
 
 
-def _create_local_config(default_provider: Optional[str] = None) -> NetworkConfig:
+def _create_local_config(default_provider: Optional[str] = None, **kwargs) -> NetworkConfig:
     return _create_network_config(
-        required_confirmations=0, block_time=0, default_provider=default_provider
+        required_confirmations=0,
+        default_provider=default_provider,
+        transaction_acceptance_timeout=DEFAULT_LOCAL_TRANSACTION_ACCEPTANCE_TIMEOUT,
+        gas_limit="max",
+        **kwargs,
     )
 
 
@@ -30,7 +35,7 @@ class AvalancheConfig(PluginConfig):
     mainnet_fork: NetworkConfig = _create_local_config()
     fuji: NetworkConfig = _create_network_config()
     fuji_fork: NetworkConfig = _create_local_config()
-    local: NetworkConfig = NetworkConfig(default_provider="test")
+    local: NetworkConfig = _create_local_config(default_provider="test")
     default_network: str = LOCAL_NETWORK_NAME
 
 
