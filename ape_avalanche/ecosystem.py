@@ -1,9 +1,10 @@
-from typing import Optional
+from typing import Optional, cast
 
 from ape.api.config import PluginConfig
 from ape.api.networks import LOCAL_NETWORK_NAME
 from ape.utils import DEFAULT_LOCAL_TRANSACTION_ACCEPTANCE_TIMEOUT
 from ape_ethereum.ecosystem import Ethereum, NetworkConfig
+from ape_ethereum.transactions import TransactionType
 
 NETWORKS = {
     # chain_id, network_id
@@ -13,19 +14,24 @@ NETWORKS = {
 
 
 def _create_network_config(
-    required_confirmations: int = 1, block_time: int = 3, **kwargs
+    required_confirmations: int = 1, block_time: int = 3, default_provider="geth", **kwargs
 ) -> NetworkConfig:
     return NetworkConfig(
-        required_confirmations=required_confirmations, block_time=block_time, **kwargs
+        block_time=block_time,
+        required_confirmations=required_confirmations,
+        default_transaction_type=TransactionType.DYNAMIC,
+        default_provider=default_provider,
+        **kwargs,
     )
 
 
 def _create_local_config(default_provider: Optional[str] = None, **kwargs) -> NetworkConfig:
     return _create_network_config(
-        required_confirmations=0,
+        block_time=0,
         default_provider=default_provider,
-        transaction_acceptance_timeout=DEFAULT_LOCAL_TRANSACTION_ACCEPTANCE_TIMEOUT,
         gas_limit="max",
+        required_confirmations=0,
+        transaction_acceptance_timeout=DEFAULT_LOCAL_TRANSACTION_ACCEPTANCE_TIMEOUT,
         **kwargs,
     )
 
@@ -42,4 +48,4 @@ class AvalancheConfig(PluginConfig):
 class Avalanche(Ethereum):
     @property
     def config(self) -> AvalancheConfig:  # type: ignore
-        return self.config_manager.get_config("avalanche")  # type: ignore
+        return cast(AvalancheConfig, self.config_manager.get_config("avalanche"))
