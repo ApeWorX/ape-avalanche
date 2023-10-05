@@ -1,7 +1,5 @@
 import ape
 import pytest
-from ape._cli import cli as ape_cli
-from click.testing import CliRunner
 
 
 @pytest.fixture
@@ -15,10 +13,14 @@ def accounts():
 
 
 @pytest.fixture
-def runner():
-    return CliRunner()
+def avalanche(networks):
+    return networks.avalanche
 
 
 @pytest.fixture
-def cli():
-    return ape_cli
+def eth_tester_provider():
+    if not ape.networks.active_provider or ape.networks.provider.name != "test":
+        with ape.networks.avalanche.local.use_provider("test") as provider:
+            yield provider
+    else:
+        yield ape.networks.provider
