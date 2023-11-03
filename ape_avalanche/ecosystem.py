@@ -17,7 +17,7 @@ def _create_config(
     required_confirmations: int = 1,
     block_time: int = 3,
     default_provider="geth",
-    cls: Type[NetworkConfig] = NetworkConfig,
+    cls: Type = NetworkConfig,
     **kwargs,
 ) -> NetworkConfig:
     return cls(
