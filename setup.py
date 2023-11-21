@@ -57,7 +57,8 @@ setup(
     url="https://github.com/ApeWorX/ape-avalanche",
     include_package_data=True,
     install_requires=[
-        "eth-ape>=0.6.7,<0.7.0",
+        "eth-ape>=0.7.0,<0.8.0",
+        "ethpm-types",  # Get ethpm version from ape
     ],
     python_requires=">=3.8,<4",
     extras_require=extras_require,
