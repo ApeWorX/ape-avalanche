@@ -20,7 +20,7 @@ class AvalancheConfig(BaseEthereumConfig):
 
 
 class Avalanche(Ethereum):
-    fee_token_symbol = "AVAX"
+    fee_token_symbol: str = "AVAX"
 
     @property
     def config(self) -> AvalancheConfig:  # type: ignore
