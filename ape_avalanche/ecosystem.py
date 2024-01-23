@@ -1,4 +1,4 @@
-from typing import ClassVar, cast
+from typing import cast
 
 from ape_ethereum.ecosystem import (
     BaseEthereumConfig,
@@ -6,7 +6,6 @@ from ape_ethereum.ecosystem import (
     NetworkConfig,
     create_network_config,
 )
-from ape_ethereum.transactions import TransactionType
 
 NETWORKS = {
     # chain_id, network_id
@@ -21,6 +20,8 @@ class AvalancheConfig(BaseEthereumConfig):
 
 
 class Avalanche(Ethereum):
+    fee_token_symbol = "AVAX"
+
     @property
     def config(self) -> AvalancheConfig:  # type: ignore
         return cast(AvalancheConfig, self.config_manager.get_config("avalanche"))
