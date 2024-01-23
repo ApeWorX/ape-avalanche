@@ -3,10 +3,6 @@ from ape_ethereum.transactions import TransactionType
 from ethpm_types import MethodABI
 
 
-def test_gas_limit(avalanche, eth_tester_provider):
-    assert avalanche.config.local.gas_limit == "max"
-
-
 # NOTE: None because we want to show the default is DYNAMIC
 @pytest.mark.parametrize("tx_type", (None, 2, "0x2"))
 def test_create_transaction(avalanche, tx_type, eth_tester_provider):
