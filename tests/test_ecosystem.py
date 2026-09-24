@@ -4,7 +4,7 @@ from ethpm_types import MethodABI
 
 
 # NOTE: None because we want to show the default is DYNAMIC
-@pytest.mark.parametrize("tx_type", (None, 2, "0x2"))
+@pytest.mark.parametrize("tx_type", [None, 2, "0x2"])
 def test_create_transaction(avalanche, tx_type, eth_tester_provider):
     tx = avalanche.create_transaction(type=tx_type)
     assert tx.type == TransactionType.DYNAMIC.value
@@ -13,7 +13,7 @@ def test_create_transaction(avalanche, tx_type, eth_tester_provider):
 
 @pytest.mark.parametrize(
     "tx_type",
-    (TransactionType.STATIC.value, TransactionType.DYNAMIC.value),
+    [TransactionType.STATIC.value, TransactionType.DYNAMIC.value],
 )
 def test_encode_transaction(tx_type, avalanche, eth_tester_provider):
     abi = MethodABI.model_validate(
