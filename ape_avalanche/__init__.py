@@ -54,18 +54,17 @@ def __getattr__(name: str):
 
         return NETWORKS
 
-    elif name == "Avalanche":
+    if name == "Avalanche":
         from ape_avalanche.ecosystem import Avalanche
 
         return Avalanche
 
-    elif name == "AvalancheConfig":
+    if name == "AvalancheConfig":
         from ape_avalanche.ecosystem import AvalancheConfig
 
         return AvalancheConfig
 
-    else:
-        raise AttributeError(name)
+    raise AttributeError(name)
 
 
 __all__ = ["NETWORKS", "Avalanche", "AvalancheConfig"]
