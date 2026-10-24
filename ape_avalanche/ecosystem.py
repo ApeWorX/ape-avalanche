@@ -24,4 +24,4 @@ class Avalanche(Ethereum):
 
     @property
     def config(self) -> AvalancheConfig:  # type: ignore
-        return cast(AvalancheConfig, self.config_manager.get_config("avalanche"))
+        return cast("AvalancheConfig", self.config_manager.get_config("avalanche"))
